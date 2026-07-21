@@ -5,8 +5,8 @@ Competition robot I designed and built for a block-sorting challenge at Northwes
 **CAD:** [View the full design on OnShape](https://cad.onshape.com/documents/bd7bf225d3cd60975be912fb/w/9dfe725a6ceab4a6fb9d2f20/e/50ae594808063be0acbd73b2?renderMode=0&uiState=6a5fcf8d376c3db27cd99228)
 
 <p float="left">
-  <img src="images/robot_photo_1.jpg" width="45%" />
-  <img src="images/robot_photo_2.jpg" width="45%" />
+  <img src="robot_photo_1.jpg" width="45%" />
+  <img src="robot_photo_2.jpg" width="45%" />
 </p>
 
 ## Overview
