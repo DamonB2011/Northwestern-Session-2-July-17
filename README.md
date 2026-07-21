@@ -1,53 +1,48 @@
 # Northwestern Session 2 - Mechatronics Competition Robot
 
-Competition robot built for a block-sorting challenge at Northwestern's Mechatronics program (July 2026). Placed 1st out of 30+ students, judged by Professor Marchuk.
+Competition robot designed and built for a block-sorting challenge as part of Northwestern University's Mechatronics program (July 2026). Placed 1st out of over 30 students in the challenge, judged by Professor Marchuk.
 
-What it does
+## Overview
 
-The robot drives forward, detects walls/obstacles using an ultrasonic distance sensor and limit switch, and uses a claw mechanism to grab and sort blocks by placing them based on brightness detected under a reflectance sensor.
+The robot autonomously navigates the competition area, uses an ultrasonic distance sensor and limit switch for wall/obstacle detection, and employs a claw mechanism to grip and pick up blocks. Blocks are sorted based on the surface brightness underneath them, as measured by a reflectance sensor.
 
-Key design decisions
+## Key Design Decisions
 
-- Claw over ram-pushing. Most competitors pushed blocks with a ram-style mechanism. I built a claw instead, more contact area on the block and more reliable, repeatable placement.
-- Reflectance-based block detection. A two-element reflectance sensor (LED + phototransistor) reads brightness off the surface directly underneath the robot. Light blocks and dark blocks return distinct brightness values, which the robot uses to decide where to place them.
-- Straight-line driving via motor calibration. Manually tuned motor duty cycles to correct for a natural pull, so the robot drives straight without constant correction logic.
+**Claw vs. Ram-pushing:** Most competitors opted for a ram-based design to push blocks. I chose a claw, which provides more surface area contact with the block and generally results in more consistent and reliable placement of sorted items.
 
-Hardware
+**Reflectance-based block sorting:** A simple two-element reflectance sensor (composed of an LED and phototransistor) was used to measure the brightness of the surface directly below the robot. Differentiating between light and dark blocks is achieved by analyzing these reflectance values.
+
+**Straight-line driving via motor calibration:** Without direct steering control, the robot had an inherent tendency to drift to one side. To mitigate this, I bypassed complex correction algorithms and instead manually tuned the duty cycles of the drive motors to ensure the robot travels in a straight line.
+
+## Hardware
 
 - Raspberry Pi Pico (main controller)
-- 2x DC motors, driven via PWM
+- 2x DC motors (controlled via PWM)
+- 2x Servos (for the claw mechanism)
+- HC-SR04 Ultrasonic Distance Sensor
+- Analog Light Sensor (for ambient light reference)
+- Analog Reflectance Sensor (for block brightness detection)
+- Limit Switch (for wall/obstacle detection)
 
-- 2x servos (claw)
+## Repo Structure
 
-- HC-SR04 ultrasonic distance sensor
+This repository contains code documenting the entire development process, from individual component tests to the fully integrated final robot:
 
-- Analog light sensor (ambient)
-
-- Analog reflectance sensor (block brightness detection)
-
-- Limit switch (wall/obstacle detection)
-
-Repo structure
-
-This repo includes the full build progression, not just the final robot, showing how the code developed from individual component tests up to the final integrated system:
-
-| File | What it does |
-
+| File | Description |
 |---|---|
+| `cipher.py` | Caesar cipher encryption and decryption (language warm-up) |
+| `morse_flasher.py` | Blinks a message in Morse code using an LED |
+| `button_led_toggle.py` | Basic digital input/output test for controlling an LED with a button |
+| `button_counter.py` | Increments a counter on each button press |
+| `potentiometer_dimmer.py` | Uses a potentiometer to control LED brightness |
+| `light_sensor_reader.py` | Reads and prints ambient light levels |
+| `distance_light_reader.py` | Reads and prints data from both distance and light sensors |
+| `servo_follows_distance.py` | Maps servo angle to real-time distance sensor readings |
+| `motor_servo_test_rig.py` | First test rig integrating motors, claw, and sensors |
+| `nav_prelim_limit_switch.py` | Initial navigation logic: drive, detect wall, turn |
+| `block_color_sensor.py` | Logic for distinguishing light and dark blocks using the reflectance sensor |
+| `competition_robot_final.py` | Final code for the competition robot: navigation, claw, wall detection |
 
-| cipher.py | Caesar cipher encrypt/decrypt - early language warm-up |
-| morse_flasher.py | Blinks a message via LED in morse code |
-| buttonledtoggle.py | Basic digital input/output test |
-| button_counter.py | Increments a counter on each button press |
-| potentiometer_dimmer.py | Analog input controlling LED brightness |
-| lightsensorreader.py | Reads and prints ambient light level |
-| distancelightreader.py | Combined distance + light sensor readout |
-| servofollowsdistance.py | Servo angle mapped to live distance readings |
-| motorservotest_rig.py | First full motor + claw + sensor integration test |
-| navprelimlimit_switch.py | Early navigation logic: drive, detect wall, turn |
-| blockcolorsensor.py | Reflectance sensor logic for detecting light vs. Dark blocks |
-| competitionrobotfinal.py | Final competition code - full navigation, claw control, and wall detection |
+## Biggest Challenge
 
-Biggest challenge
-
-Keeping track of and coordinating all the components as build complexity grew, motors, two servos, three sensor types, and the navigation logic all had to run together without conflicting or timing out on each other.
+The most significant hurdle was managing the complexity and coordination of multiple hardware components. Ensuring that the motors, servos, various sensors, and navigation algorithms worked together seamlessly without introducing conflicts or timing errors required extensive debugging to isolate the root cause of many issues.
