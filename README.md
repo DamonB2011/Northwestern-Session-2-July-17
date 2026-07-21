@@ -17,6 +17,10 @@ The robot navigates the competition area on its own, uses an ultrasonic distance
 
 **Claw vs. ram-pushing.** Most competitors went with a ram-style design that just pushes blocks around. I built a claw instead. It grips more of the block's surface, so placement ends up a lot more consistent. Full claw geometry and assembly is in the [CAD model](https://cad.onshape.com/documents/bd7bf225d3cd60975be912fb/w/9dfe725a6ceab4a6fb9d2f20/e/50ae594808063be0acbd73b2?renderMode=0&uiState=6a5fcf8d376c3db27cd99228).
 
+## Design Log
+
+The full day-by-day process is documented in `Damon's Design Log.pdf`, included in this repo. It covers the build from July 6 through July 17, including early planning sketches, breadboard photos at each stage, and the code as it evolved from single-component tests to the final integrated robot. It's the rawest look at the actual process, dead ends included, rather than just the finished result.
+
 **Reflectance-based sorting.** A simple reflectance sensor, just an LED and a phototransistor, reads how bright the surface is directly below the robot. Light blocks and dark blocks come back with clearly different readings, which is enough to sort by.
 
 **Straight-line driving through motor calibration.** With no steering system, the robot naturally drifted to one side. Rather than write correction code for it, I just manually tuned the motor duty cycles until it drove straight on its own.
